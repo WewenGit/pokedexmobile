@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">PokedexMobile</string>
+    <string name="app_name">MegaGigaDex</string>
+    <string name="pokemon">Pokemon :</string>
+    <string name="poke_name">Enter a Pokemon name</string>
 </resources>
