@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Looper looper = Looper.getMainLooper();
 
         //Start
-        GetPokemon.call(poke_request, looper, tv, img);
+        GetPokemon.call(poke_request, looper, tv);
     }
 
    /* public void call(String req, Looper looper, TextView tv, ImageView img) {
