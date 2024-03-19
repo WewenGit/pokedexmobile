@@ -3,7 +3,6 @@ package com.example.pokedexmobile;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
@@ -11,17 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import com.example.pokedexmobile.APIRequests.GetPokemon;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -49,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Looper looper = Looper.getMainLooper();
 
         //Start
-        GetPokemon.call(poke_request, looper, tv);
+        GetPokemon.call(poke_request, looper, tv, img);
     }
 
    /* public void call(String req, Looper looper, TextView tv, ImageView img) {
