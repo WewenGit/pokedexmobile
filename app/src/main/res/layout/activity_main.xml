@@ -17,12 +17,14 @@
             android:layout_height="wrap_content"
             android:text="@string/pokemon">
         </TextView>
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/poke_name"
-            android:id="@+id/edt_poke_name">
-        </EditText>
+            android:id="@+id/edt_poke_name"
+            android:inputType="text"
+            android:autofillHints="Enter Pokemon name or ID" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

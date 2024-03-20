@@ -10,12 +10,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.pokedexmobile.APIRequests.GetPokemon;
+import com.example.pokedexmobile.APIRequests.GetDetailledDescription;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button go;
-    private GetPokemon gp;
+    private GetDetailledDescription gp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Looper looper = Looper.getMainLooper();
 
         //Start
-        GetPokemon.call(poke_request, looper, tv, img);
+        GetDetailledDescription.call(poke_request, looper, tv, img);
     }
 
    /* public void call(String req, Looper looper, TextView tv, ImageView img) {
