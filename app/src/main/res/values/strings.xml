@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">PokedexMobile</string>
+    <string name="app_name">MegaGigaDex</string>
+    <string name="pokemon">Pokemon :</string>
+    <string name="poke_name">Enter a Pokemon name</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
