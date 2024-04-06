@@ -61,4 +61,6 @@ public class ListFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_list, container, false);
     }
+
+    //Faut gérer la liste là
 }

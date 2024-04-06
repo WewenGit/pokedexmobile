@@ -4,4 +4,5 @@
     <string name="poke_name">Enter a Pokemon name</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="searchMenu">Search Pokemon</string>
 </resources>
