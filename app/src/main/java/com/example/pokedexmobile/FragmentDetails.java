@@ -9,5 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class FragmentDetails extends Fragment {
-    //Mettre tout le del-bor du bouton go ici et le fait que ça marche le faire bien
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_details, container, false);
+    }
 }

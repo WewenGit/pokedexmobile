@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailsActivity"
+    tools:context=".RandomPokeActivity"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -15,31 +15,16 @@
         android:background="@color/green"
         />
 
-    <LinearLayout
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:text="@string/getRandomPokeBtn"
+        android:id="@+id/getRdmPokeBtn" />
 
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/poke_name"
-            android:id="@+id/edt_poke_name"
-            android:inputType="text"
-            android:autofillHints="Enter Pokemon name or ID" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Go !"
-            android:id="@+id/btn_go">
-        </Button>
-    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/pokeDetailsFrag" />
-
+        android:id="@+id/generatedPokeFrag" />
 
 </LinearLayout>

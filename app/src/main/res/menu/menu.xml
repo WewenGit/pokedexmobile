@@ -10,5 +10,9 @@
         android:id="@+id/searchPoke"
         android:title="@string/searchMenu"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/generatePoke"
+        android:title="@string/genPoke"
+        app:showAsAction="ifRoom" />
 
 </menu>

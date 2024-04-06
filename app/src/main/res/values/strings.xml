@@ -6,4 +6,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="searchMenu">Search Pokemon</string>
     <string name="listMenu">Pokemon List</string>
+    <string name="getRandomPokeBtn">Get me a random Pokemon NOW !</string>
+    <string name="genPoke">Pokemon Generator</string>
 </resources>

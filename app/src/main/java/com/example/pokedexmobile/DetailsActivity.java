@@ -1,6 +1,7 @@
 package com.example.pokedexmobile;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -25,6 +26,9 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.pokeDetailsFrag, new FragmentDetails());
+        ft.commit();
         androidx.appcompat.widget.Toolbar tb = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tb);
         go = findViewById(R.id.btn_go);
@@ -65,6 +69,11 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+
+            case R.id.generatePoke:
+                Intent i3 = new Intent(this, RandomPokeActivity.class);
+                startActivity(i3);
+                return true;
             case R.id.listPoke:
                 Intent i1 = new Intent(this, MainActivity.class);
                 startActivity(i1);
