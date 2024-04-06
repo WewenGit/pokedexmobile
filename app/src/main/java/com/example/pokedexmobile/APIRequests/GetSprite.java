@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -42,19 +43,20 @@ public class GetSprite {
     }
 
     public static Bitmap getBitmapFromURL(String src) {
+        StringBuilder error = new StringBuilder();
         try {
-            Log.e("src",src);
+            Log.e("src", src);
             URL url = new URL(src);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoInput(true);
             connection.connect();
             InputStream input = connection.getInputStream();
             Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            Log.e("Bitmap","returned");
+            Log.e("Bitmap", "returned");
             return myBitmap;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            Log.e("Exception",e.getMessage());
+            Log.e("Exception", Objects.requireNonNull(e.getMessage()));
             return null;
         }
     }

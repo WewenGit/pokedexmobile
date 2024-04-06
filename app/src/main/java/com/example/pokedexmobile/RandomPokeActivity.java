@@ -1,29 +1,57 @@
 package com.example.pokedexmobile;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.pokedexmobile.APIRequests.GetDetailledDescription;
+
+public class RandomPokeActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private Button generate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_random_poke);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.generatedPokeFrag, new FragmentDetails());
+        ft.commit();
         androidx.appcompat.widget.Toolbar tb = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tb);
+        generate = findViewById(R.id.getRdmPokeBtn);
+        generate.setOnClickListener(this);
     }
 
-    //Mettre la liste dans ListFragment et gérer comment elle fonctionne ici là, juste là.
 
-    //Gestion de la Toolbar
+    @Override
+    public void onClick(View v) {
+        int rdm = (int) (Math.random() * 850);
+        String poke_id = String.valueOf(rdm);
+        TextView tv = findViewById(R.id.tv_poke);
+        ImageView img = findViewById(R.id.img_poke);
+
+        //Request creation
+        String poke_request = "https://pokeapi.co/api/v2/pokemon/" + poke_id;
+        Looper looper = Looper.getMainLooper();
+
+        //Start
+        GetDetailledDescription.call(poke_request, looper, tv, img);
+    }
+
+    // Gestion de la Toolbar
     public boolean onCreateOptionsMenu(Menu m) {
         super.onCreateOptionsMenu(m);
         MenuInflater inflater = getMenuInflater();
