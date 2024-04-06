@@ -38,7 +38,7 @@ public class RandomPokeActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        int rdm = (int) (Math.random() * 850);
+        int rdm = (int) (Math.random() * 1025);
         String poke_id = String.valueOf(rdm);
         TextView tv = findViewById(R.id.tv_poke);
         ImageView img = findViewById(R.id.img_poke);

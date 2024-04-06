@@ -8,4 +8,7 @@
     <string name="listMenu">Pokemon List</string>
     <string name="getRandomPokeBtn">Get me a random Pokemon NOW !</string>
     <string name="genPoke">Pokemon Generator</string>
+    <string name="load_more">Load more</string>
+    <string name="impossible_to_load_more">Impossible to load more</string>
+    <string name="can_t_load_anymore_pokemon">Can\'t load anymore Pokemon</string>
 </resources>
