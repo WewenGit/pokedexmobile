@@ -2,6 +2,7 @@ package com.example.pokedexmobile.APIRequests;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -86,9 +88,13 @@ public class GetDetailledDescription {
         private static void display(String resultatJSON, TextView txt, ImageView img) {
             String[] res = decodeJSON(resultatJSON);
             txt.setText(res[0]);
-            Looper l = Looper.getMainLooper();
-            String sprite_request = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + res[1] + ".png";
-            GetSprite.call(sprite_request, l, img);
+            Log.e("PokeGetDetails", "returned" + Arrays.toString(res));
+
+            if (!res[0].equals("Erreur parsing du résultat JSON, le Pokémon entré n'existe probablement pas.")) {
+                Looper l = Looper.getMainLooper();
+                String sprite_request = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + res[1] + ".png";
+                GetSprite.call(sprite_request, l, img);
+            }
         }
 
         /**
