@@ -2,7 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/listPoke"
+        android:title="@string/listMenu"
+        app:showAsAction="ifRoom"
+        />
+    <item
         android:id="@+id/searchPoke"
         android:title="@string/searchMenu"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
+
 </menu>

@@ -35,9 +35,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.listPoke:
+                Intent i1 = new Intent(this, MainActivity.class);
+                startActivity(i1);
+                return true;
             case R.id.searchPoke:
-                Intent i = new Intent(this, DetailsActivity.class);
-                startActivity(i);
+                Intent i2 = new Intent(this, DetailsActivity.class);
+                startActivity(i2);
                 return true;
         }
         return true;
