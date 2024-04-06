@@ -19,7 +19,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_detail);
         go = findViewById(R.id.btn_go);
         go.setOnClickListener(this);
     }
