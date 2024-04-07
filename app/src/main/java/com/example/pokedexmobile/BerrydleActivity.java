@@ -1,6 +1,7 @@
 package com.example.pokedexmobile;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -8,20 +9,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentTransaction;
 
-public class BerrydleActivity extends AppCompatActivity {
+public class BerrydleActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button bdleNG, bdleAnsw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_berrydle);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        bdleNG = findViewById(R.id.bdleNewGame);
+        bdleAnsw = findViewById(R.id.bdleguess);
+        bdleNG.setOnClickListener(this);
+        bdleAnsw.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
