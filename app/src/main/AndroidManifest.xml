@@ -15,6 +15,9 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".BerrydleActivity"
+            android:exported="false" />
+        <activity
             android:name=".RandomPokeActivity"
             android:exported="false" />
         <activity
