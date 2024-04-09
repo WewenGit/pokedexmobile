@@ -1,31 +1,36 @@
 package com.example.pokedexmobile;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toolbar;
+
+import com.example.pokedexmobile.BroadcastReceiver.AirplaneBroadcastReceiver;
 
 public class MainActivity extends AppCompatActivity {
+
+    //définition du broadcast receiver mode avion
+
+    //TODO private static boolean airplaneActivated;
+    private AirplaneBroadcastReceiver airplaneReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        airplaneReceiver = new AirplaneBroadcastReceiver();
         setContentView(R.layout.activity_main2);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.framelist,new ListFragment());
         ft.commit();
-        androidx.appcompat.widget.Toolbar tb = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
+        androidx.appcompat.widget.Toolbar tb = findViewById(R.id.toolbar);
         setSupportActionBar(tb);
     }
-
-    //Mettre la liste dans ListFragment et gérer comment elle fonctionne ici là, juste là.
 
     //Gestion de la Toolbar
     public boolean onCreateOptionsMenu(Menu m) {
@@ -58,4 +63,19 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        registerReceiver(airplaneReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(airplaneReceiver);
+    }
+
+
+    //TODO public static void setAirplaneActivated(boolean b){airplaneActivated=b;}
 }
