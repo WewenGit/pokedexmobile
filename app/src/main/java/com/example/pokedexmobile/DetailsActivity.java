@@ -86,6 +86,10 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 Intent i2 = new Intent(this, DetailsActivity.class);
                 startActivity(i2);
                 return true;
+            case R.id.berrydleGame:
+                Intent i4 = new Intent(this, BerrydleActivity.class);
+                startActivity(i4);
+                return true;
         }
         return true;
     }

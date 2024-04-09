@@ -14,5 +14,9 @@
         android:id="@+id/generatePoke"
         android:title="@string/genPoke"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/berrydleGame"
+        android:title="@string/berrydle"
+        app:showAsAction="ifRoom" />
 
 </menu>

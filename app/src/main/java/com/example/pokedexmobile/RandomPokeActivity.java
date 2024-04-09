@@ -75,6 +75,10 @@ public class RandomPokeActivity extends AppCompatActivity implements View.OnClic
                 Intent i3 = new Intent(this, RandomPokeActivity.class);
                 startActivity(i3);
                 return true;
+            case R.id.berrydleGame:
+                Intent i4 = new Intent(this, BerrydleActivity.class);
+                startActivity(i4);
+                return true;
         }
         return true;
     }
