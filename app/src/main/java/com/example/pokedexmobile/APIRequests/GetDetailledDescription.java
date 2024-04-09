@@ -11,6 +11,7 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -112,9 +113,23 @@ public class GetDetailledDescription {
 
         }
 
+    private static void display(String resultatJSON, TextView tvName, TextView tvType1, TextView tvType2, ImageView img) {
+        String[] res = decodeJSON(resultatJSON);
+        tvName.setText(res[2]);
+        tvType1.setText(res[3]);
+        if (res[4]!=null){
+            tvType2.setText(res[4]);
+        }
+        if (!res[0].equals("Erreur parsing du résultat JSON, le Pokémon entré n'existe probablement pas.")) {
+            Looper l = Looper.getMainLooper();
+            String sprite_request = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + res[1] + ".png";
+            GetSprite.call(sprite_request, l, img);
+        }
+
+    }
+
         private static void displayBasic(TextView txt, ImageView img, String[] res){
             txt.setText(res[0]);
-            Log.e("PokeGetDetails", "returned" + Arrays.toString(res));
 
             if (!res[0].equals("Erreur parsing du résultat JSON, le Pokémon entré n'existe probablement pas.")) {
                 Looper l = Looper.getMainLooper();
@@ -225,5 +240,22 @@ public class GetDetailledDescription {
                 }
             });
         }
+
+    public static void call(String requete, Looper looper, TextView tvName, TextView tvType1, TextView tvType2, ImageView img) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(looper);
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                String data = getDataFromHTTP(requete);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        display(data, tvName, tvType1, tvType2, img);
+                    }
+                });
+            }
+        });
+    }
     }
 

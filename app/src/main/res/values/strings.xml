@@ -11,4 +11,6 @@
     <string name="load_more">Load more</string>
     <string name="impossible_to_load_more">Impossible to load more</string>
     <string name="can_t_load_anymore_pokemon">Can\'t load anymore Pokemon</string>
+    <string name="pokemonsprite">PokemonSprite</string>
+    <string name="veuillez_d_sactiver_le_mode_avion">Veuillez désactiver le mode avion.</string>
 </resources>
