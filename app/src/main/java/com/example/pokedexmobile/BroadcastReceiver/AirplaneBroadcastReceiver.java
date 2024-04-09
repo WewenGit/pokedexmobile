@@ -24,6 +24,7 @@ public class AirplaneBroadcastReceiver extends BroadcastReceiver {
                     activity.setContentView(R.layout.activity_main_airplane);
                 } else {
                     //TODO remettre l'ancien état
+                    activity.setContentView(R.layout.activity_main2);
                 }
             });
         }
