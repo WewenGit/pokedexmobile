@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 import com.example.pokedexmobile.APIRequests.GetDetailledDescription;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,8 +30,12 @@ public class ListFragment extends Fragment{
 
     private Button loadMoreButton;
     private int lastPokemonId;
+    private int buttonId;
 
+    private FavoritePokemonDB favDBHelper;
     private LinearLayout ll;
+    private ArrayList<Integer> favoritePokemonList;
+    private boolean isFavList=false;
     public ListFragment() {
         // Required empty public constructor
     }
@@ -37,7 +43,13 @@ public class ListFragment extends Fragment{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            favDBHelper = (FavoritePokemonDB) getArguments().getSerializable("favDBHelper");
+            favoritePokemonList = getArguments().getIntegerArrayList("favList");
+            isFavList = getArguments().getBoolean("isFavList");
+        }
     }
 
     @Override
@@ -59,7 +71,7 @@ public class ListFragment extends Fragment{
         loadMoreButton=new Button(getContext());
         //si on est à la première génération de la list on définit les attributes suivants
         lastPokemonId=0;
-        int buttonId = 1051054080;
+        buttonId = 1051054080;
         loadMoreButton.setId(buttonId);
         loadMoreButton.setText(R.string.load_more);
         loadMoreButton.setOnClickListener(this::clickLoadMore);
@@ -67,22 +79,20 @@ public class ListFragment extends Fragment{
 
         //def des params pour le linear layout
 
-        if (lastPokemonId==1000){
-            for (int i = 1001; i <= 1025; i++) {
+
+        if (isFavList){
+            for (int i :favoritePokemonList) {
                 setAPokemonInLayout(i);
             }
-            //Can't load more
-            loadMoreButton = v.findViewById(buttonId);
-            loadMoreButton.setText(R.string.can_t_load_anymore_pokemon);
-            loadMoreButton.setEnabled(false);
         }
         else{
             for (int i = lastPokemonId+1; i <= lastPokemonId+100; i++) {
                 setAPokemonInLayout(i);
             }
             lastPokemonId+=100;
+            ll.addView(loadMoreButton);
         }
-        ll.addView(loadMoreButton);
+
 
         sv.addView(ll);
         return v;
@@ -108,13 +118,25 @@ public class ListFragment extends Fragment{
 
         TextView infoView = new TextView(getContext());
         ImageView iv = new ImageView(getContext());
+        ButtonAddFavorite addFav;
+        if (favoritePokemonList.contains(i)){
+            addFav = new ButtonAddFavorite(getContext(),i, favDBHelper, true);
+        }
+        else{
+            addFav = new ButtonAddFavorite(getContext(),i, favDBHelper, false);
+        }
+
         String poke_request = "https://pokeapi.co/api/v2/pokemon/" + i;
         Looper looper = Looper.getMainLooper();
         GetDetailledDescription.call(poke_request, looper, infoView, iv, textPlusImg);
         textPlusImg.addView(infoView);
         textPlusImg.addView(iv);
+        textPlusImg.addView(addFav.getButton());
         ll.addView(textPlusImg);
     }
+
+
+
 
 
     //si on clique sur load more
@@ -122,6 +144,13 @@ public class ListFragment extends Fragment{
 
         ll.removeView(loadMoreButton);
         for (int i = lastPokemonId + 1; i <= lastPokemonId + 100; i++) {
+            if (i>1025){
+                //Can't load more
+                loadMoreButton = v.findViewById(buttonId);
+                loadMoreButton.setText(R.string.can_t_load_anymore_pokemon);
+                loadMoreButton.setEnabled(false);
+                break;
+            }
             setAPokemonInLayout(i);
         }
         lastPokemonId += 100;
