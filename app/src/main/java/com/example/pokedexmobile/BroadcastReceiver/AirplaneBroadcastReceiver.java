@@ -17,13 +17,13 @@ public class AirplaneBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) throws UnsupportedOperationException{
         boolean activated = intent.getBooleanExtra("state", false);
         if (intent.getAction() != null && intent.getAction().equals(Intent.ACTION_AIRPLANE_MODE_CHANGED)) {
-            //Log.d("ONRECEIVE","ouaip");
             activity = (MainActivity) context;
             activity.runOnUiThread(() -> {
                 if (activated) {
                     activity.setContentView(R.layout.activity_main_airplane);
                 } else {
-                    //TODO remettre l'ancien état
+                    /*Intent i1 = new Intent(activity, MainActivity.class);
+                    activity.startActivity(i1);*/
                 }
             });
         }

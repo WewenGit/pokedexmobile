@@ -13,4 +13,7 @@
     <string name="can_t_load_anymore_pokemon">Can\'t load anymore Pokemon</string>
     <string name="pokemonsprite">PokemonSprite</string>
     <string name="veuillez_d_sactiver_le_mode_avion">Veuillez désactiver le mode avion.</string>
+    <string name="favorites">Favorites</string>
+    <string name="add_to_favorites">Add to favorites</string>
+    <string name="remove">Remove favorite</string>
 </resources>

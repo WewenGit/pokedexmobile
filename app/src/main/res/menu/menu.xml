@@ -15,4 +15,9 @@
         android:title="@string/genPoke"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/favorites"
+        android:title="@string/favorites"
+        app:showAsAction="ifRoom" />
+
 </menu>
