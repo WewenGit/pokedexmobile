@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.os.Looper;
@@ -45,16 +46,18 @@ public class ListFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            favDBHelper = (FavoritePokemonDB) getArguments().getSerializable("favDBHelper");
-            favoritePokemonList = getArguments().getIntegerArrayList("favList");
-            isFavList = getArguments().getBoolean("isFavList");
-        }
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        favDBHelper = new FavoritePokemonDB(getContext());
+        if (getArguments() != null) {
+            favoritePokemonList = getArguments().getIntegerArrayList("favList");
+            isFavList = getArguments().getBoolean("isFavList");
+        }
+
         //définition de la liste de 200
         View v = inflater.inflate(R.layout.fragment_list, container, false);
         ScrollView sv = v.findViewById(R.id.listFragment);

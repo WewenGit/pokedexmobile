@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,24 +22,35 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private AirplaneBroadcastReceiver airplaneReceiver;
-    private FavoritePokemonDB favDBHelper;
+    private static FavoritePokemonDB favDBHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        boolean isAirPlaneModeOn = Settings.System.getInt(this.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
+
         airplaneReceiver = new AirplaneBroadcastReceiver();
         favDBHelper = new FavoritePokemonDB(this);
-        setContentView(R.layout.activity_main2);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ListFragment listFragment = new ListFragment();
-        Bundle args = new Bundle();
-        args.putSerializable("favDBHelper", favDBHelper);
-        args.putIntegerArrayList("favList", getAllFavoritePokemon());
-        listFragment.setArguments(args);
-        ft.replace(R.id.framelist,listFragment);
-        ft.commit();
-        androidx.appcompat.widget.Toolbar tb = findViewById(R.id.toolbar);
-        setSupportActionBar(tb);
+
+        if (isAirPlaneModeOn){
+            setContentView(R.layout.activity_main_airplane);
+        }
+        else{
+            setContentView(R.layout.activity_main2);
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ListFragment listFragment = new ListFragment();
+            Bundle args = new Bundle();
+            args.putSerializable("favDBHelper", favDBHelper);
+            args.putIntegerArrayList("favList", getAllFavoritePokemon());
+            listFragment.setArguments(args);
+            ft.replace(R.id.framelist,listFragment);
+            ft.commit();
+            androidx.appcompat.widget.Toolbar tb = findViewById(R.id.toolbar);
+            setSupportActionBar(tb);
+        }
+
     }
 
     //Gestion de la Toolbar
@@ -69,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 args.putIntegerArrayList("favList", getAllFavoritePokemon());
                 Intent i4 = new Intent(this, FavoritePokemonActivity.class);
                 i4.putExtras(args);
+                startActivity(i4);
                 break;
             case R.id.berrydleGame:
                 Intent i5 = new Intent(this, BerrydleActivity.class);
@@ -90,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         unregisterReceiver(airplaneReceiver);
     }
 
-    public ArrayList<Integer> getAllFavoritePokemon() {
+    public static ArrayList<Integer> getAllFavoritePokemon() {
         ArrayList<Integer> favoritePokemonIds = new ArrayList<>();
 
         String selectQuery = "SELECT " + FavoritePokemonDB.KEY_ID + " FROM " + FavoritePokemonDB.TABLE_FAVORITES;
