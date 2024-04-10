@@ -35,6 +35,7 @@ public class ListFragment extends Fragment{
     private FavoritePokemonDB favDBHelper;
     private LinearLayout ll;
     private ArrayList<Integer> favoritePokemonList;
+    private boolean isFavList=false;
     public ListFragment() {
         // Required empty public constructor
     }
@@ -47,6 +48,7 @@ public class ListFragment extends Fragment{
         if (getArguments() != null) {
             favDBHelper = (FavoritePokemonDB) getArguments().getSerializable("favDBHelper");
             favoritePokemonList = getArguments().getIntegerArrayList("favList");
+            isFavList = getArguments().getBoolean("isFavList");
         }
     }
 
@@ -78,11 +80,19 @@ public class ListFragment extends Fragment{
         //def des params pour le linear layout
 
 
-        for (int i = lastPokemonId+1; i <= lastPokemonId+100; i++) {
-            setAPokemonInLayout(i);
+        if (isFavList){
+            for (int i :favoritePokemonList) {
+                setAPokemonInLayout(i);
+            }
         }
-        lastPokemonId+=100;
-        ll.addView(loadMoreButton);
+        else{
+            for (int i = lastPokemonId+1; i <= lastPokemonId+100; i++) {
+                setAPokemonInLayout(i);
+            }
+            lastPokemonId+=100;
+            ll.addView(loadMoreButton);
+        }
+
 
         sv.addView(ll);
         return v;

@@ -37,6 +37,10 @@
             android:name=".DetailsActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".FavoritePokemonActivity"
+            android:exported="true">
+        </activity>
         <receiver android:name=".BroadcastReceiver.AirplaneBroadcastReceiver"
             android:exported="true">
             <intent-filter>
