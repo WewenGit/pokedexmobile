@@ -2,6 +2,7 @@ package com.example.pokedexmobile;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Looper;
 import android.view.Menu;
@@ -15,10 +16,12 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pokedexmobile.APIRequests.GetBerry;
+import com.example.pokedexmobile.BroadcastReceiver.AirplaneReciever;
 
 public class BerrydleActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button bdleNG, bdleAnsw;
+    private AirplaneReciever arpr, arpr2;
     private String[] berryData, berryGuess; //0 : Firmness 1 : Growth Time 2 : Max Harvest
     // 4 : size 5 : smoothness 6 : soil_dryness 7 : Berry Name 8 : Natural gift type
 
@@ -33,6 +36,8 @@ public class BerrydleActivity extends AppCompatActivity implements View.OnClickL
         bdleAnsw = findViewById(R.id.bdleguess);
         bdleNG.setOnClickListener(this);
         bdleAnsw.setOnClickListener(this);
+        arpr = new AirplaneReciever(bdleAnsw);
+        arpr2 = new AirplaneReciever(bdleNG);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -98,6 +103,21 @@ public class BerrydleActivity extends AppCompatActivity implements View.OnClickL
                 return true;
         }
         return true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        registerReceiver(arpr,filter);
+        registerReceiver(arpr2,filter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(arpr);
+        unregisterReceiver(arpr2);
     }
 
 

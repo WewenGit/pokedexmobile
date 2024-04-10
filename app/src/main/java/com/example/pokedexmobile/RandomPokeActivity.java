@@ -17,24 +17,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.pokedexmobile.APIRequests.GetDetailledDescription;
-import com.example.pokedexmobile.BroadcastReceiver.HeadsetPlugReciever;
+import com.example.pokedexmobile.BroadcastReceiver.AirplaneReciever;
 
 public class RandomPokeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button generate;
-    private HeadsetPlugReciever hdr;
+    private AirplaneReciever arpr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_poke);
-        hdr = new HeadsetPlugReciever();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.generatedPokeFrag, new FragmentDetails());
         ft.commitAllowingStateLoss();
         androidx.appcompat.widget.Toolbar tb = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tb);
         generate = findViewById(R.id.getRdmPokeBtn);
+        arpr = new AirplaneReciever(generate);
         generate.setOnClickListener(this);
     }
 
@@ -89,13 +89,13 @@ public class RandomPokeActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onStart() {
         super.onStart();
-        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
-        registerReceiver(hdr, intentFilter);
+        IntentFilter filter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        registerReceiver(arpr,filter);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        unregisterReceiver(hdr);
+        unregisterReceiver(arpr);
     }
 }

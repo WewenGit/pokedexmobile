@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Looper;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.pokedexmobile.APIRequests.GetDetailledDescription;
+import com.example.pokedexmobile.BroadcastReceiver.AirplaneReciever;
 
 import java.util.Locale;
 
@@ -24,6 +26,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
     private Button go;
     private GetDetailledDescription gp;
+    private AirplaneReciever arpr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,8 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         setSupportActionBar(tb);
         go = findViewById(R.id.btn_go);
         go.setOnClickListener(this);
+        arpr = new AirplaneReciever(go);
+
     }
 
     //Gestion du bouton GO, l'affichage est géré par la requête API "GetDetailledDescription", à qui on
@@ -94,6 +99,17 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         return true;
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        registerReceiver(arpr,filter);
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(arpr);
+    }
 
 }

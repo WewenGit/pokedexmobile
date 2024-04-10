@@ -13,18 +13,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.example.pokedexmobile.BroadcastReceiver.AirplaneBroadcastReceiver;
+//import com.example.pokedexmobile.BroadcastReceiver.AirplaneBroadcastReceiver;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private AirplaneBroadcastReceiver airplaneReceiver;
+    //private AirplaneBroadcastReceiver airplaneReceiver;
     private FavoritePokemonDB favDBHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        airplaneReceiver = new AirplaneBroadcastReceiver();
+        //airplaneReceiver = new AirplaneBroadcastReceiver();
         favDBHelper = new FavoritePokemonDB(this);
         setContentView(R.layout.activity_main2);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
-    @Override
+    /*@Override
     protected void onStart() {
         super.onStart();
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         unregisterReceiver(airplaneReceiver);
-    }
+    }*/
 
     public ArrayList<Integer> getAllFavoritePokemon() {
         ArrayList<Integer> favoritePokemonIds = new ArrayList<>();
