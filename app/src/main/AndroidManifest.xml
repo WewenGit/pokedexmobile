@@ -16,6 +16,9 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".BerrydleActivity"
+            android:exported="false" />
+        <activity
             android:name=".RandomPokeActivity"
             android:exported="false" />
         <activity
@@ -33,11 +36,6 @@
         <activity
             android:name=".DetailsActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <receiver android:name=".BroadcastReceiver.AirplaneBroadcastReceiver"
             android:exported="true">

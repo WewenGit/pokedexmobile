@@ -22,8 +22,7 @@ public class AirplaneBroadcastReceiver extends BroadcastReceiver {
                 if (activated) {
                     activity.setContentView(R.layout.activity_main_airplane);
                 } else {
-                    /*Intent i1 = new Intent(activity, MainActivity.class);
-                    activity.startActivity(i1);*/
+                    activity.setContentView(R.layout.activity_main2);
                 }
             });
         }

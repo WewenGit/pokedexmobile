@@ -17,6 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.pokedexmobile.APIRequests.GetDetailledDescription;
+
+import java.util.Locale;
+
 public class DetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button go;
@@ -44,6 +47,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         //Data extraction
         EditText req_poke = findViewById(R.id.edt_poke_name);
         String poke_name = req_poke.getText().toString();
+        poke_name = poke_name.toLowerCase();
         TextView tv = findViewById(R.id.tv_poke);
         ImageView img = findViewById(R.id.img_poke);
 
@@ -81,6 +85,10 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.searchPoke:
                 Intent i2 = new Intent(this, DetailsActivity.class);
                 startActivity(i2);
+                return true;
+            case R.id.berrydleGame:
+                Intent i4 = new Intent(this, BerrydleActivity.class);
+                startActivity(i4);
                 return true;
         }
         return true;

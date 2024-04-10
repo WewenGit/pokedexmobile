@@ -18,10 +18,6 @@ import com.example.pokedexmobile.BroadcastReceiver.AirplaneBroadcastReceiver;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
-    //définition du broadcast receiver mode avion
-
-    //TODO private static boolean airplaneActivated;
     private AirplaneBroadcastReceiver airplaneReceiver;
     private FavoritePokemonDB favDBHelper;
 
@@ -58,24 +54,26 @@ public class MainActivity extends AppCompatActivity {
             case R.id.listPoke:
                 Intent i1 = new Intent(this, MainActivity.class);
                 startActivity(i1);
-                return true;
+                break;
             case R.id.searchPoke:
                 Intent i2 = new Intent(this, DetailsActivity.class);
                 startActivity(i2);
-                return true;
+                break;
             case R.id.generatePoke:
                 Intent i3 = new Intent(this, RandomPokeActivity.class);
                 startActivity(i3);
-                return true;
-
+                break;
             case R.id.favorites:
                 Bundle args = new Bundle();
                 args.putSerializable("favDBHelper", favDBHelper);
                 args.putIntegerArrayList("favList", getAllFavoritePokemon());
                 Intent i4 = new Intent(this, FavoritePokemonActivity.class);
                 i4.putExtras(args);
-                startActivity(i4);
-                return true;
+                break;
+            case R.id.berrydleGame:
+                Intent i5 = new Intent(this, BerrydleActivity.class);
+                startActivity(i5);
+                break;
         }
         return true;
     }
@@ -112,6 +110,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    //TODO public static void setAirplaneActivated(boolean b){airplaneActivated=b;}
 }

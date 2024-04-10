@@ -1,8 +1,5 @@
 package com.example.pokedexmobile;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,45 +10,65 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
-import com.example.pokedexmobile.APIRequests.GetDetailledDescription;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class RandomPokeActivity extends AppCompatActivity implements View.OnClickListener {
+import com.example.pokedexmobile.APIRequests.GetBerry;
 
-    private Button generate;
+public class BerrydleActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private Button bdleNG, bdleAnsw;
+    private String[] berryData, berryGuess; //0 : Firmness 1 : Growth Time 2 : Max Harvest
+    // 4 : size 5 : smoothness 6 : soil_dryness 7 : Berry Name 8 : Natural gift type
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_random_poke);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.generatedPokeFrag, new FragmentDetails());
-        ft.commit();
+        setContentView(R.layout.activity_berrydle);
         androidx.appcompat.widget.Toolbar tb = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tb);
-        generate = findViewById(R.id.getRdmPokeBtn);
-        generate.setOnClickListener(this);
+        getBerryData();
+        bdleNG = findViewById(R.id.bdleNewGame);
+        bdleAnsw = findViewById(R.id.bdleguess);
+        bdleNG.setOnClickListener(this);
+        bdleAnsw.setOnClickListener(this);
     }
 
-
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
-        int rdm = (int) (Math.random() * 1025);
-        String poke_id = String.valueOf(rdm);
-        TextView tv = findViewById(R.id.tv_poke);
-        ImageView img = findViewById(R.id.img_poke);
-
-        //Request creation
-        String poke_request = "https://pokeapi.co/api/v2/pokemon/" + poke_id;
-        Looper looper = Looper.getMainLooper();
-
-        //Start
-        GetDetailledDescription.call(poke_request, looper, tv, img);
+        if (v == findViewById(R.id.bdleguess)) {
+            guess();
+        } else if (v == findViewById(R.id.bdleNewGame)) {
+            Intent i = new Intent(this, BerrydleActivity.class);
+            startActivity(i);
+        }
     }
 
-    // Gestion de la Toolbar
+    public void guess(){
+        EditText edt = findViewById(R.id.bdleEdt);
+        String berryGuess = edt.getText().toString();
+        berryGuess = berryGuess.toLowerCase();
+        LinearLayout sv = findViewById(R.id.bdleLL);
+        //Request creation
+        String berryrq = "https://pokeapi.co/api/v2/berry/" + berryGuess;
+        Looper looper = Looper.getMainLooper();
+
+        String[] guess = GetBerry.guessBerry(looper, berryrq,sv,this);
+
+    }
+
+    public void getBerryData() {
+        int rdm = (int) (Math.random() * 64);
+        String berryid = String.valueOf(rdm);
+        String berry_rq = "https://pokeapi.co/api/v2/berry/" + berryid;
+        Looper looper = Looper.getMainLooper();
+
+        berryData = GetBerry.callBerry(looper, berry_rq);
+
+    }
+
     public boolean onCreateOptionsMenu(Menu m) {
         super.onCreateOptionsMenu(m);
         MenuInflater inflater = getMenuInflater();
@@ -82,4 +99,6 @@ public class RandomPokeActivity extends AppCompatActivity implements View.OnClic
         }
         return true;
     }
+
+
 }
